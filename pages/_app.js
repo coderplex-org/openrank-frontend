@@ -8,6 +8,7 @@ class MyApp extends App{
     const { Component, pageProps, reduxStore } = this.props;
     return (
       <Provider store={reduxStore}>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
         <Component {...pageProps} />
       </Provider>
     );

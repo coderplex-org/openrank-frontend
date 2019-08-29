@@ -4,15 +4,15 @@ import { renderCounter, increment, decrementByValue, decrement, incrementByValue
 import Counter from '../components/counter';
 
 class Index extends React.Component{
-  static getInitialProps({reduxStore}) {
-    reduxStore.dispatch(renderCounter());
-    return {
-    };
-  }
+  // static getInitialProps({reduxStore}) {
+  //   reduxStore.dispatch(renderCounter());
+  //   return {
+  //   };
+  // }
 
   componentDidMount () {
-    this.counter = setInterval(() => this.props.increment(), 1000)
-    this.anotherCounter = setInterval(() => this.props.decrementByValue(10), 10000)
+    this.counter = setInterval(() => this.props.increment(), 1000);
+    this.anotherCounter = setInterval(() => this.props.decrementByValue(10), 10000);
   }
 
   componentWillUnmount () {
