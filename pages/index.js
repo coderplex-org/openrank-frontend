@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { renderCounter, increment, decrementByValue, decrement, incrementByValue } from '../redux/actions/counter';
 import Counter from '../components/counter';
+import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Box";
+import Layout from '../components/layout';
 
 class Index extends React.Component{
   // static getInitialProps({reduxStore}) {
@@ -21,7 +24,15 @@ class Index extends React.Component{
   }
 
   render() {
-    return <Counter />
+    return (
+        <Layout title={'Home'}>
+            <Container>
+                <Box my={4}>
+                    <Counter />
+                </Box>
+            </Container>
+        </Layout>
+    )
   }
 }
 
