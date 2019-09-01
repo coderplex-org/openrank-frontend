@@ -4,7 +4,12 @@
       <span @click="$router.push('/')">Open Rank</span>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <slot></slot>
+    <v-btn text>
+      <span class="mr-2">Login</span>
+    </v-btn>
+    <v-btn text>
+      <span class="mr-2">SignUp</span>
+    </v-btn>
   </v-app-bar>
 </template>
 
