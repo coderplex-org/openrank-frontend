@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app flat dark color="primary">
+  <v-app-bar app flat dark color="indigo lighten-1">
     <v-toolbar-title class="headline text-uppercase">
       <span @click="$router.push('/')">Open Rank</span>
     </v-toolbar-title>
