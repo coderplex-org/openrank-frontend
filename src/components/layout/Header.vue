@@ -7,7 +7,7 @@
     <v-btn text>
       <span class="mr-2">Login</span>
     </v-btn>
-    <v-btn text>
+    <v-btn text to="/register">
       <span class="mr-2">SignUp</span>
     </v-btn>
   </v-app-bar>
