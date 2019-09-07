@@ -2,7 +2,7 @@
   <v-row align="start" justify="center">
     <v-col sm="7">
       <card>
-        <template v-slot:title>Register</template>
+        <template v-slot:title>Login</template>
         <v-form>
           <form-alerts :alerts="alerts"></form-alerts>
           <form-fields :fields="fields"></form-fields>
@@ -25,20 +25,18 @@ import {
   FormButtons,
 } from '../components';
 
-const { mapState, mapMutations, mapActions } = createNamespacedHelpers('authentication/register');
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('authentication/login');
 
 export default {
-  name: 'Register',
+  name: 'Login',
   data() {
     return {
     };
   },
   computed: {
     ...mapState([
-      'name',
       'email',
       'password',
-      'passwordConfirmed',
       'successMsg',
     ]),
     alerts() {
@@ -51,14 +49,6 @@ export default {
     },
     fields() {
       return [
-        {
-          label: 'Name',
-          placeholder: 'Enter your name',
-          type: 'text',
-          icon: 'mdi-rename-box',
-          value: this.name,
-          input: this.setName,
-        },
         {
           label: 'Email',
           placeholder: 'Enter Email',
@@ -75,35 +65,25 @@ export default {
           value: this.password,
           input: this.setPassword,
         },
-        {
-          label: 'Confirm Password',
-          placeholder: 'Re Enter Password',
-          type: 'password',
-          icon: 'mdi-lock',
-          value: this.passwordConfirmed,
-          input: this.setPasswordConfirmed,
-        },
       ];
     },
     buttons() {
       return [
         {
-          icon: 'mdi-account',
-          value: 'Register',
-          click: this.register,
+          icon: 'mdi-fingerprint',
+          value: 'Login',
+          click: this.login,
         },
       ];
     },
   },
   methods: {
     ...mapMutations([
-      'setName',
       'setEmail',
       'setPassword',
-      'setPasswordConfirmed',
     ]),
     ...mapActions([
-      'register',
+      'login',
     ]),
   },
   components: {

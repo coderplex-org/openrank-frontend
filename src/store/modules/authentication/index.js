@@ -1,4 +1,5 @@
 import register from './register';
+import login from './login';
 
 export default {
   namespaced: true,
@@ -13,5 +14,6 @@ export default {
   },
   modules: {
     register,
+    login,
   },
 };

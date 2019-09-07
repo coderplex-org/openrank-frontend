@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'TestFields',
+  name: 'FormFields',
   props: {
     fields: Array,
   },
