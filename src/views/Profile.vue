@@ -1,5 +1,5 @@
 <template>
-  <custom-form title="Profile" :alerts="alerts" :fields="fields" :buttons="buttons"></custom-form>
+  <custom-form title="Update Profile" :alerts="alerts" :fields="fields" :buttons="buttons"></custom-form>
 </template>
 
 <script>
@@ -24,6 +24,7 @@ export default {
       'id',
       'name',
       'email',
+      'password',
       'successMsg',
     ]),
     ...mapGetters([
@@ -55,13 +56,21 @@ export default {
           value: this.email,
           input: this.setEmail,
         },
+        {
+          label: 'Password',
+          placeholder: 'Enter Password',
+          type: 'password',
+          icon: 'mdi-lock',
+          value: this.password,
+          input: this.setPassword,
+        },
       ];
     },
     buttons() {
       return [
         {
           icon: 'mdi-account',
-          value: 'Update',
+          value: 'Update Profile',
           click: this.updateUser,
         },
       ];
@@ -71,6 +80,7 @@ export default {
     ...mapMutations([
       'setName',
       'setEmail',
+      'setPassword',
     ]),
     ...mapActions([
       'fetchUser',

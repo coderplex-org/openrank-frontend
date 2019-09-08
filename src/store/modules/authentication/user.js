@@ -8,6 +8,7 @@ export default {
     id: null,
     name: null,
     email: null,
+    password: null,
     successMsg: null,
   },
   mutations: {
@@ -22,6 +23,9 @@ export default {
     },
     setEmail(state, email) {
       state.emeail = email;
+    },
+    setPassword(state, password) {
+      state.password = password;
     },
     setSuccessMsg(state, message) {
       state.successMsg = message;
@@ -45,6 +49,7 @@ export default {
         id,
         name,
         email,
+        password,
         token,
       },
       commit,
@@ -53,6 +58,7 @@ export default {
         id,
         name,
         email,
+        password,
       }, {
         headers: {
           Authorization: `Bearer ${token}`,
