@@ -50,9 +50,10 @@ export default {
         password_confirmed,
       }).then(({ data: { message } }) => {
         commit('setSuccessMsg', message);
+        setTimeout(() => commit('setSuccessMsg', null), 2000);
       }).catch(({ response }) => {
         commit('setErrorMsg', rootGetters.getErrorMessage(response));
-        console.log(response);
+        setTimeout(() => commit('setErrorMsg', null), 2000);
       });
     },
   },

@@ -37,14 +37,13 @@ export default {
         email,
         password,
       }).then(({ data: { data: { token }, message } }) => {
-        console.log('TOKEN', token);
         commit('authentication/user/setToken', token, { root: true });
         commit('setSuccessMsg', message);
+        setTimeout(() => commit('setSuccessMsg', null), 2000);
         router.push('/').catch(() => {});
       }).catch(({ response }) => {
-        console.log('CAME HERE');
         commit('setErrorMsg', rootGetters.getErrorMessage(response));
-        console.log(response);
+        setTimeout(() => commit('setErrorMsg', null), 2000);
       });
     },
   },
