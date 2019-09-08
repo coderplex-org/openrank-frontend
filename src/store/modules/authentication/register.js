@@ -4,11 +4,11 @@ export default {
   namespaced: true,
   strict: true,
   state: {
-    name: '',
-    email: '',
-    password: '',
-    passwordConfirmed: '',
-    successMsg: '',
+    name: null,
+    email: null,
+    password: null,
+    passwordConfirmed: null,
+    successMsg: null,
   },
   mutations: {
     setName(state, name) {
