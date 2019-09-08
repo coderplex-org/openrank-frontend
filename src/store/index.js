@@ -29,5 +29,24 @@ export default new Vuex.Store({
   modules: {
     authentication,
   },
+  getters: {
+    getErrorMessage: () => (response) => {
+      console.log('HERE', response);
+      const { status, data: { data: { errors } = {}, message } } = response;
+      if (message) {
+        return message;
+      }
+      if (status === 500) {
+        return 'Internal Server Error: Please try again after some time.';
+      }
+      if (status === 400) {
+        if (Array.isArray(errors)) {
+          return errors.map(error => error.message).join(' + ');
+        }
+        return 'Bad Request: Check if all the fields are correctly entered';
+      }
+      return 'Something went wrong. Please try again after some time.';
+    },
+  },
   plugins,
 });

@@ -1,5 +1,14 @@
 import HTTP from '../../../http';
 
+function clearUser(commit) {
+  commit('setId', null);
+  commit('setName', null);
+  commit('setEmail', null);
+  commit('setPassword', null);
+  commit('setSuccessMsg', false);
+  commit('setErrorMsg', false);
+}
+
 export default {
   namespaced: true,
   strict: true,
@@ -10,6 +19,7 @@ export default {
     email: null,
     password: null,
     successMsg: null,
+    errorMsg: null,
   },
   mutations: {
     setToken(state, token) {
@@ -22,7 +32,7 @@ export default {
       state.name = name;
     },
     setEmail(state, email) {
-      state.emeail = email;
+      state.email = email;
     },
     setPassword(state, password) {
       state.password = password;
@@ -30,9 +40,15 @@ export default {
     setSuccessMsg(state, message) {
       state.successMsg = message;
     },
+    setErrorMsg(state, message) {
+      state.errorMsg = message;
+    },
   },
   actions: {
-    async fetchUser({ state: { token }, commit }) {
+    clearUser({ commit }) {
+      clearUser(commit);
+    },
+    async fetchUser({ state: { token }, commit, rootGetters }) {
       await HTTP().get('/user', {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -42,6 +58,9 @@ export default {
         commit('setName', name);
         commit('setEmail', email);
         commit('setSuccessMsg', message);
+      }).catch(({ response }) => {
+        commit('setErrorMsg', rootGetters.getErrorMessage(response));
+        console.log(response);
       });
     },
     async updateUser({
@@ -53,6 +72,7 @@ export default {
         token,
       },
       commit,
+      rootGetters,
     }) {
       await HTTP().post(`/users/${id}`, {
         id,
@@ -68,6 +88,9 @@ export default {
         commit('setName', user.name);
         commit('setEmail', user.email);
         commit('setSuccessMSg', message);
+      }).catch(({ response }) => {
+        commit('setErrorMsg', rootGetters.getErrorMessage(response));
+        console.log(response);
       });
     },
   },

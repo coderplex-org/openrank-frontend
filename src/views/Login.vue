@@ -23,12 +23,17 @@ export default {
       'email',
       'password',
       'successMsg',
+      'errorMsg',
     ]),
     alerts() {
       return [
         {
           type: 'success',
           message: this.successMsg,
+        },
+        {
+          type: 'error',
+          message: this.errorMsg,
         },
       ];
     },
@@ -57,7 +62,7 @@ export default {
         {
           icon: 'mdi-fingerprint',
           value: 'Login',
-          click: this.login,
+          onClick: this.login,
         },
       ];
     },
