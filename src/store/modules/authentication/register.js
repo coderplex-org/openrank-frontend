@@ -9,6 +9,7 @@ export default {
     password: null,
     passwordConfirmed: null,
     successMsg: null,
+    errorMsg: null,
   },
   mutations: {
     setName(state, name) {
@@ -26,10 +27,14 @@ export default {
     setSuccessMsg(state, message) {
       state.successMsg = message;
     },
+    setErrorMsg(state, message) {
+      state.errorMsg = message;
+    },
   },
   actions: {
     async register({
       commit,
+      rootGetters,
       state: {
         name,
         email,
@@ -38,13 +43,16 @@ export default {
         passwordConfirmed: password_confirmed,
       },
     }) {
-      await HTTP().post('/users', {
+      await HTTP().post('users', {
         name,
         email,
         password,
         password_confirmed,
       }).then(({ data: { message } }) => {
         commit('setSuccessMsg', message);
+      }).catch(({ response }) => {
+        commit('setErrorMsg', rootGetters.getErrorMessage(response));
+        console.log(response);
       });
     },
   },

@@ -1,10 +1,10 @@
 <template>
   <fragment>
     <v-btn
-      v-for="({ icon, value, click }, index) in buttons"
+      v-for="({ icon, value, onClick }, index) in buttons"
       color="deep-purple accent-4"
       text
-      @click="click"
+      @click="onClick"
       :key="index"
     >
       <v-icon left>{{ icon }}</v-icon>

@@ -25,12 +25,17 @@ export default {
       'password',
       'passwordConfirmed',
       'successMsg',
+      'errorMsg',
     ]),
     alerts() {
       return [
         {
           type: 'success',
           message: this.successMsg,
+        },
+        {
+          type: 'error',
+          message: this.errorMsg,
         },
       ];
     },
@@ -75,7 +80,7 @@ export default {
         {
           icon: 'mdi-account',
           value: 'Register',
-          click: this.register,
+          onClick: this.register,
         },
       ];
     },

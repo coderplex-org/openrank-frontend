@@ -1,5 +1,6 @@
 <template>
-  <custom-form title="Update Profile" :alerts="alerts" :fields="fields" :buttons="buttons"></custom-form>
+  <custom-form title="Update Profile" :alerts="alerts" :fields="fields" :buttons="buttons">
+  </custom-form>
 </template>
 
 <script>
@@ -26,6 +27,7 @@ export default {
       'email',
       'password',
       'successMsg',
+      'errorMsg',
     ]),
     ...mapGetters([
       'isLoggedIn',
@@ -35,6 +37,10 @@ export default {
         {
           type: 'success',
           message: this.successMsg,
+        },
+        {
+          type: 'error',
+          message: this.errorMsg,
         },
       ];
     },
@@ -71,7 +77,7 @@ export default {
         {
           icon: 'mdi-account',
           value: 'Update Profile',
-          click: this.updateUser,
+          onClick: this.updateUser,
         },
       ];
     },
@@ -91,7 +97,7 @@ export default {
     if (!this.isLoggedIn) {
       return this.$router.push('/login');
     }
-    this.$store.dispatch('authentication/fetchUser');
+    this.$store.dispatch('authentication/user/fetchUser');
   },
   components: {
     CustomForm,

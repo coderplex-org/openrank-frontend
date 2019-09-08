@@ -1,4 +1,5 @@
 import HTTP from '../../../http';
+import router from '../../../router';
 
 export default {
   namespaced: true,
@@ -7,6 +8,7 @@ export default {
     email: '',
     password: '',
     successMsg: '',
+    errorMsg: null,
   },
   mutations: {
     setEmail(state, email) {
@@ -18,10 +20,14 @@ export default {
     setSuccessMsg(state, message) {
       state.successMsg = message;
     },
+    setErrorMsg(state, message) {
+      state.errorMsg = message;
+    },
   },
   actions: {
     async login({
       commit,
+      rootGetters,
       state: {
         email,
         password,
@@ -31,8 +37,14 @@ export default {
         email,
         password,
       }).then(({ data: { data: { token }, message } }) => {
+        console.log('TOKEN', token);
         commit('authentication/user/setToken', token, { root: true });
         commit('setSuccessMsg', message);
+        router.push('/').catch(() => {});
+      }).catch(({ response }) => {
+        console.log('CAME HERE');
+        commit('setErrorMsg', rootGetters.getErrorMessage(response));
+        console.log(response);
       });
     },
   },
