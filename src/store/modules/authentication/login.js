@@ -30,7 +30,8 @@ export default {
       await HTTP().post('/login', {
         email,
         password,
-      }).then(({ data: { message } }) => {
+      }).then(({ data: { data: { token }, message } }) => {
+        commit('authentication/user/setToken', token, { root: true });
         commit('setSuccessMsg', message);
       });
     },

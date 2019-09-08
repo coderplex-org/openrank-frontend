@@ -4,18 +4,30 @@
       <span @click="$router.push('/')">Open Rank</span>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn text to="/login">
+    <v-btn text to="/login" v-if="!isLoggedIn">
       <span class="mr-2">Login</span>
     </v-btn>
-    <v-btn text to="/register">
+    <v-btn text to="/register" v-if="!isLoggedIn">
       <span class="mr-2">SignUp</span>
+    </v-btn>
+    <v-btn text to="/profile" v-if="isLoggedIn">
+      <span class="mr-2">Profile</span>
     </v-btn>
   </v-app-bar>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex';
+
+const { mapGetters } = createNamespacedHelpers('authentication/user');
+
 export default {
   name: 'Header',
+  computed: {
+    ...mapGetters([
+      'isLoggedIn',
+    ]),
+  },
 };
 </script>
 

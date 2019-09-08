@@ -1,30 +1,34 @@
 <template>
-  <custom-form title="Login" :alerts="alerts" :fields="fields" :buttons="buttons"></custom-form>
+  <custom-form title="Update Profile" :alerts="alerts" :fields="fields" :buttons="buttons"></custom-form>
 </template>
 
 <script>
 import { createNamespacedHelpers } from 'vuex';
 import { CustomForm } from '../components';
 
-const { mapState, mapMutations, mapActions } = createNamespacedHelpers('authentication/register');
-const { mapGetters } = createNamespacedHelpers('authentication/user');
+const {
+  mapState,
+  mapMutations,
+  mapActions,
+  mapGetters,
+} = createNamespacedHelpers('authentication/user');
 
 export default {
-  name: 'Register',
+  name: 'Profile',
   data() {
     return {
     };
   },
   computed: {
-    ...mapGetters([
-      'isLoggedIn',
-    ]),
     ...mapState([
+      'id',
       'name',
       'email',
       'password',
-      'passwordConfirmed',
       'successMsg',
+    ]),
+    ...mapGetters([
+      'isLoggedIn',
     ]),
     alerts() {
       return [
@@ -60,22 +64,14 @@ export default {
           value: this.password,
           input: this.setPassword,
         },
-        {
-          label: 'Confirm Password',
-          placeholder: 'Re Enter Password',
-          type: 'password',
-          icon: 'mdi-lock',
-          value: this.passwordConfirmed,
-          input: this.setPasswordConfirmed,
-        },
       ];
     },
     buttons() {
       return [
         {
           icon: 'mdi-account',
-          value: 'Register',
-          click: this.register,
+          value: 'Update Profile',
+          click: this.updateUser,
         },
       ];
     },
@@ -85,16 +81,17 @@ export default {
       'setName',
       'setEmail',
       'setPassword',
-      'setPasswordConfirmed',
     ]),
     ...mapActions([
-      'register',
+      'fetchUser',
+      'updateUser',
     ]),
   },
   mounted() {
-    if (this.isLoggedIn) {
-      return this.$router.push('/profile');
+    if (!this.isLoggedIn) {
+      return this.$router.push('/login');
     }
+    this.$store.dispatch('authentication/fetchUser');
   },
   components: {
     CustomForm,

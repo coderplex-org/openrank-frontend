@@ -1,31 +1,13 @@
 <template>
-  <v-row align="start" justify="center">
-    <v-col sm="7">
-      <card>
-        <template v-slot:title>Login</template>
-        <v-form>
-          <form-alerts :alerts="alerts"></form-alerts>
-          <form-fields :fields="fields"></form-fields>
-        </v-form>
-        <template v-slot:actions>
-          <form-buttons :buttons="buttons"></form-buttons>
-        </template>
-      </card>
-    </v-col>
-  </v-row>
+  <custom-form title="Login" :alerts="alerts" :fields="fields" :buttons="buttons"></custom-form>
 </template>
 
 <script>
 import { createNamespacedHelpers } from 'vuex';
-
-import {
-  Card,
-  FormFields,
-  FormAlerts,
-  FormButtons,
-} from '../components';
+import { CustomForm } from '../components';
 
 const { mapState, mapMutations, mapActions } = createNamespacedHelpers('authentication/login');
+const { mapGetters } = createNamespacedHelpers('authentication/user');
 
 export default {
   name: 'Login',
@@ -34,6 +16,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters([
+      'isLoggedIn',
+    ]),
     ...mapState([
       'email',
       'password',
@@ -86,11 +71,13 @@ export default {
       'login',
     ]),
   },
+  mounted() {
+    if (this.isLoggedIn) {
+      return this.$router.push('/profile');
+    }
+  },
   components: {
-    Card,
-    FormFields,
-    FormAlerts,
-    FormButtons,
+    CustomForm,
   },
 };
 </script>
