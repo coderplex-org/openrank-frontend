@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'Card',
+  name: 'DataDetails',
 };
 </script>
 
