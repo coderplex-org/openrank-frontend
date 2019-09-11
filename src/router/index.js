@@ -6,6 +6,7 @@ import {
   Register,
   Login,
   Profile,
+  Dashboard,
 } from '../views';
 
 Vue.use(Router);
@@ -38,6 +39,11 @@ export default new Router({
       path: '/profile',
       name: 'profile',
       component: Profile,
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: Dashboard,
     },
   ],
 });
