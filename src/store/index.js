@@ -4,6 +4,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import authentication from './modules/authentication';
+import { Loading } from './plugins';
 
 Vue.use(Vuex);
 
@@ -12,8 +13,10 @@ const debug = process.env.NODE_ENV !== 'production';
 const plugins = debug ? [
   createLogger(),
   // createPersistedState(),
+  Loading,
 ] : [
   createPersistedState(),
+  Loading,
 ];
 
 export default new Vuex.Store({

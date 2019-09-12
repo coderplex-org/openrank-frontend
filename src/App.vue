@@ -4,7 +4,6 @@
       :active.sync="isLoading"
       color="indigo"
       loader="dots"
-      opacity=0.4
       is-full-page
     ></loading>
     <Layout>
