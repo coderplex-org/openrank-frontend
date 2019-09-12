@@ -19,17 +19,22 @@ const plugins = debug ? [
 export default new Vuex.Store({
   state: {
     baseUrl: '/api',
+    loading: false,
   },
   mutations: {
-
+    setLoading(state, loading) {
+      state.loading = loading;
+    },
   },
   actions: {
-
   },
   modules: {
     authentication,
   },
   getters: {
+    isLoading(state) {
+      return state.loading;
+    },
     getErrorMessage: () => (response) => {
       console.log('HERE', response);
       const { status, data: { data: { errors } = {}, message } } = response;
