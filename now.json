@@ -1,4 +1,5 @@
 {
+  "alias": ["openrank.now.sh", "openrank.coderplex.org"],
   "routes": [
     {
       "src": "/api/(.*)",
