@@ -1,10 +1,32 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <v-data-iterator
       :items="items"
       :items-per-page.sync="itemsPerPage"
       :footer-props="{ itemsPerPageOptions }"
+      :search="search"
     >
+      <!-- Search bar to search from filtered items -->
+      <template v-slot:header>
+        <v-toolbar
+          dark
+          color="blue darken-3"
+          class="mb-1"
+        >
+          <v-text-field
+            class="mx-4"
+            v-model="search"
+            clearable
+            flat
+            solo-inverted
+            hide-details
+            prepend-inner-icon="search"
+            label="Search"
+          ></v-text-field>
+        </v-toolbar>
+      </template>
+
+      <!-- Filtered rows/items -->
       <template v-slot:default="props">
         <template v-for="(item, index) in props.items">
           <component
@@ -19,84 +41,31 @@
 </template>
 
 <script>
-import QuestionListItem from './QuestionListItem';
-
-const dummyData = [
-  {
-    props: {
-      title: 'Frozen Yogurt',
-      category: 'Coding',
-      tags: ['some', 'random', 'tag'],
-    },
-  },
-  {
-    props: {
-      title: 'Frozen Yogurt',
-      category: 'Coding',
-      tags: ['some', 'random', 'tag'],
-    },
-  },
-  {
-    props: {
-      title: 'Frozen Yogurt',
-      category: 'Coding',
-      tags: ['some', 'random', 'tag'],
-      subCategory: 'Some categ',
-    },
-  },
-  {
-
-    props: {
-      title: 'Frozen Yogurt',
-      category: 'Coding',
-      tags: ['some', 'random', 'tag'],
-    },
-  },
-  {
-
-    props: {
-      title: 'Frozen Yogurt',
-      category: 'Coding',
-      tags: ['some', 'random', 'tag'],
-      subCategory: 'Some categ',
-    },
-  },
-  {
-
-    props: {
-      title: 'Frozen Yogurt',
-      category: 'Coding',
-      tags: ['some', 'random', 'tag'],
-      subCategory: 'Some categ',
-    },
-  },
-  {
-
-    props: {
-      title: 'Frozen Yogurt',
-      category: 'Coding',
-      tags: ['some', 'random', 'tag'],
-    },
-  },
-  {
-
-    props: {
-      title: 'Frozen Yogurt',
-      category: 'Coding',
-      tags: ['some', 'random', 'tag'],
-      subCategory: 'Some categ',
-    },
-  },
-];
-
 export default {
   name: 'DataListContainer',
-  data: () => ({
-    childComponent: QuestionListItem,
-    itemsPerPageOptions: [4, 8, 12],
-    itemsPerPage: 4,
-    items: dummyData,
-  }),
+  data() {
+    return {
+      search: '',
+    };
+  },
+  props: {
+    childComponent: {
+      type: Object,
+      default: () => ({}),
+    },
+    itemsPerPageOptions: {
+      type: Array,
+      default: () => [5, 10, 15, 20],
+    },
+    itemsPerPage: {
+      type: Number,
+      default: 5,
+    },
+    items: {
+      type: Array,
+      default: () => [],
+    },
+  },
   methods: {
     getChildComponent(child) {
       return child || this.childComponent;
