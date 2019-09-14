@@ -1,13 +1,10 @@
 <template>
   <v-card
-      class="mx-auto"
+    class="mx-auto"
   >
     <v-list>
       <v-list-item class="ma-auto">
         <v-list-item-title>Filter</v-list-item-title>
-        <v-btn class="ma-2" large tile icon>
-          <v-icon>mdi-filter</v-icon>
-        </v-btn>
       </v-list-item>
       <ORFilterSection
         v-for="(section, key) in dataSections"

@@ -35,7 +35,7 @@ export default {
       const dummyData = [
         {
           props: {
-            title: 'Frozen Yogurt',
+            title: 'Other than Yogurt',
             category: 'Coding',
             tags: ['some', 'random', 'tag'],
           },

@@ -5,6 +5,7 @@
       :items-per-page.sync="itemsPerPage"
       :footer-props="{ itemsPerPageOptions }"
       :search="search"
+      :custom-filter="customFilter"
     >
       <!-- Search bar to search from filtered items -->
       <template v-slot:header>
@@ -46,6 +47,7 @@ export default {
   data() {
     return {
       search: '',
+      dataItems: this.items,
     };
   },
   props: {
@@ -65,6 +67,23 @@ export default {
       type: Array,
       default: () => [],
     },
+    customFilter: {
+      type: Function,
+      default: (items, search) => {
+        const res = items.filter(({ props }, index) => {
+          for(let key in props) {
+            let val = props[key];
+            if (
+              typeof val === 'string' &&
+              val.toLowerCase()
+              .match(search.toLowerCase()) !== null
+            ) return true;
+          }
+          return false;
+        });
+        return res;
+      }
+    }
   },
   methods: {
     getChildComponent(child) {
