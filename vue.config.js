@@ -2,9 +2,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'https://localhost:8000',
-        ws: true,
-        changeOrigin: true,
+        target: 'http://localhost:8000',
         headers: {
           Connection: 'keep-alive',
         },
