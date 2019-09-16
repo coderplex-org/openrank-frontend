@@ -23,13 +23,8 @@
 </template>
 
 <script>
-import { Card } from './'
-
 export default {
   name: 'DataDetails',
-  components: {
-    Card,
-  },
 };
 </script>
 

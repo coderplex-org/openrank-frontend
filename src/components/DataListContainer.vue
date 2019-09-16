@@ -2,7 +2,6 @@
   <v-container>
     <v-data-iterator
       :items="items"
-      :items-per-page.sync="itemsPerPage"
       :footer-props="{ itemsPerPageOptions }"
       :search="search"
       :custom-filter="customFilter"
@@ -29,10 +28,10 @@
 
       <!-- Filtered rows/items -->
       <template v-slot:default="props">
-        <template v-for="(item, index) in props.items">
+        <template v-for="({ child, props }, index) in props.items">
           <component
-            :is="getChildComponent(item.child)"
-            v-bind="item.props"
+            :is="getChildComponent(child)"
+            v-bind="props"
             :key="index">
           </component>
         </template>
@@ -44,24 +43,14 @@
 <script>
 export default {
   name: 'DataListContainer',
-  data() {
-    return {
-      search: '',
-      dataItems: this.items,
-    };
-  },
   props: {
     childComponent: {
       type: Object,
-      default: () => ({}),
+      default: () => {},
     },
     itemsPerPageOptions: {
       type: Array,
       default: () => [5, 10, 15, 20],
-    },
-    itemsPerPage: {
-      type: Number,
-      default: 5,
     },
     items: {
       type: Array,
@@ -69,21 +58,28 @@ export default {
     },
     customFilter: {
       type: Function,
-      default: (items, search) => {
-        const res = items.filter(({ props }, index) => {
-          for(let key in props) {
-            let val = props[key];
-            if (
-              typeof val === 'string' &&
-              val.toLowerCase()
+      default: (items, search) => items.filter(({ props }) => {
+        for (const key in props) {
+          const val = props[key];
+          if (
+            typeof val === 'string' &&
+            val.toLowerCase()
               .match(search.toLowerCase()) !== null
-            ) return true;
-          }
-          return false;
-        });
-        return res;
+          ) return true;
+        }
+        return false;
+      }),
+    },
+  },
+  computed: {
+    search: {
+      get() {
+        return this.$store.getters['data/dashboard/getSearch'];
+      },
+      set(search) {
+        this.$store.commit('data/dashboard/setSearch', search);
       }
-    }
+    },
   },
   methods: {
     getChildComponent(child) {

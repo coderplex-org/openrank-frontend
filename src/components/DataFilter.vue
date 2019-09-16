@@ -6,53 +6,27 @@
       <v-list-item class="ma-auto">
         <v-list-item-title>Filter</v-list-item-title>
       </v-list-item>
-      <ORFilterSection
-        v-for="(section, key) in dataSections"
-        :key="key"
-        v-bind="section"
+      <ORFilterSectionsContainer
+        v-for="(section, index) in sections"
+        :key="index"
+        v-bind="{...section, index }"
       />
     </v-list>
   </v-card>
 </template>
 
 <script>
-import ORFilterSection from './ORFilterSection';
+import ORFilterSectionsContainer from './ORFilterSectionsContainer';
 
 export default {
   name: 'DataFilter',
   components: {
-    ORFilterSection,
+    ORFilterSectionsContainer,
   },
   data() {
-    return { dataSections: this.sections };
+    return {};
   },
-  props: {
-    sections: {
-      type: Array,
-      default: () => [
-        {
-          name: 'Section 1',
-          items: [['Management', 'management'],
-          ['Settings', 'settings']],
-          search: '',
-          model: [],
-        },
-        {
-          name: 'Section 2',
-          items: [['Management', 'management'],
-          ['Settings', 'settings']],
-          search: '',
-          model: [],
-        },
-        {
-          name: 'Section 3',
-          items: [['Management', 'management'],
-          ['Settings', 'settings']],
-          model: [],
-        },
-      ],
-    },
-  },
+  props: ['sections'],
 };
 </script>
 

@@ -1,10 +1,13 @@
 <template>
-  <ThreeSectionContainer>
+  <ThreeSectionContainer :showFilter="showFilter" :setShowFilter="setShowFilter" >
     <template v-slot:left>
-      <DataFilter />
+      <DataFilter :sections="sections" />
     </template>
     <template v-slot:middle>
-      <DataListContainer v-bind="{childComponent: getChildComponent(), items: getDataItemsFromApi()}" />
+      <DataListContainer
+        :childComponent="childComponent"
+        :items="items"
+      />
     </template>
     <template v-slot:right>
       <DataDetails />
@@ -21,6 +24,11 @@ import {
 } from '../components';
 import ThreeSectionContainer from '../components/common';
 
+import { createNamespacedHelpers } from 'vuex';
+
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers('data/dashboard');
+const { mapGetters } = createNamespacedHelpers('data/dashboard');
+
 export default {
   components: {
     ThreeSectionContainer,
@@ -28,78 +36,55 @@ export default {
     DataDetails,
     DataFilter,
   },
-  methods: {
-    getDataItemsFromApi() {
-      //TODO: Make API call and fetch data items from server
-      //Modify this function to achieve the same.
-      const dummyData = [
+  computed: {
+    ...mapGetters([
+      'isLoggedIn',
+    ]),
+    ...mapState([
+      'childComponent',
+      'items',
+      'sections',
+      'showFilter',
+      'successMsg',
+      'errorMsg',
+    ]),
+    alerts() {
+      return [
         {
-          props: {
-            title: 'Other than Yogurt',
-            category: 'Coding',
-            tags: ['some', 'random', 'tag'],
-          },
+          type: 'success',
+          message: this.successMsg,
         },
         {
-          props: {
-            title: 'Frozen Yogurt',
-            category: 'Coding',
-            tags: ['some', 'random', 'tag'],
-          },
-        },
-        {
-          props: {
-            title: 'Frozen Yogurt',
-            category: 'Coding',
-            tags: ['some', 'random', 'tag'],
-            subCategory: 'Some categ',
-          },
-        },
-        {
-
-          props: {
-            title: 'Frozen Yogurt',
-            category: 'Coding',
-            tags: ['some', 'random', 'tag'],
-          },
-        },
-        {
-
-          props: {
-            title: 'Frozen Yogurt',
-            category: 'Coding',
-            tags: ['some', 'random', 'tag'],
-            subCategory: 'Some categ',
-          },
-        },
-        {
-
-          props: {
-            title: 'Frozen Yogurt',
-            category: 'Coding',
-            tags: ['some', 'random', 'tag'],
-            subCategory: 'Some categ',
-          },
-        },
-        {
-
-          props: {
-            title: 'Frozen Yogurt',
-            category: 'Coding',
-            tags: ['some', 'random', 'tag'],
-          },
-        },
-        {
-
-          props: {
-            title: 'Frozen Yogurt',
-            category: 'Coding',
-            tags: ['some', 'random', 'tag'],
-            subCategory: 'Some categ',
-          },
+          type: 'error',
+          message: this.errorMsg,
         },
       ];
-      return dummyData;
+    },
+  },
+  mounted() {
+    if (process.env.NODE_ENV === 'production') {
+    if (!this.isLoggedIn) {
+      return this.$router.push('/login');
+    }
+    this.$store.dispatch('authentication/user/fetchUser');
+    } else {
+      this.$store.dispatch('data/dashboard/fetchDummyData');
+      this.$store.dispatch('data/dashboard/fetchSectionsData');
+    }
+  },
+  methods: {
+    ...mapMutations([
+      'setFilter',
+      'setDetails',
+      'setSearch',
+      'setShowFilter'
+    ]),
+    ...mapActions([
+      'fetchData',
+    ]),
+    getDataItemsFromApi() {
+      // TODO: Make API call and fetch data items from server
+      // Modify this function to achieve the same.
     },
     getChildComponent() {
       return QuestionListItem;

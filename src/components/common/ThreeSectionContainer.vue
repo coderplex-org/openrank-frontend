@@ -3,7 +3,7 @@
     <!-- Toolbar - will be displayed on mobiel or tablets -->
     <v-col v-if="$vuetify.breakpoint.mdAndDown" cols="12">
       <v-toolbar class="pa-0">
-        <v-btn class="ma-0" large tile elevation="0" @click="showFilter = !showFilter">
+        <v-btn class="ma-0" large tile elevation="0" @click="setShowFilter(!showFilter)">
           <v-icon v-if="!showFilter">mdi-filter</v-icon>
           <v-icon v-if="showFilter">mdi-arrow-left</v-icon>
           {{ showFilter ? "Back" : "Filter"}}
@@ -53,10 +53,17 @@ export default {
   name: 'ThreeSectionContainer',
   data() {
     return {
-      showFilter: false,
-    }
+    };
   },
   props: {
+    showFilter: {
+      type: Boolean,
+      default: false,
+    },
+    setShowFilter: {
+      type: Function,
+      default: () => {},
+    },
     leftProps: {
       type: Object,
       default: () => ({
@@ -64,17 +71,17 @@ export default {
         sm: 12,
         md: 12,
         lg: 3,
-      })
+      }),
     },
     middleProps: {
       type: Object,
       default: () => ({
-        xs:12,
+        xs: 12,
         sm: 12,
         md: 12,
-        lg:6,
+        lg: 6,
         class: 'pa-0',
-      })
+      }),
     },
     rightProps: {
       type: Object,
@@ -83,24 +90,24 @@ export default {
         sm: 12,
         md: 12,
         lg: 3,
-      })
+      }),
     },
   },
   methods: {
     isFilterOpen() {
       const {
         mdAndDown,
-        lgAndUp
-      } = this.$vuetify.breakpoint
+        lgAndUp,
+      } = this.$vuetify.breakpoint;
       return (
         (
-          mdAndDown &&
-          this.showFilter
+          mdAndDown
+          && this.showFilter
         ) || lgAndUp
-      )
-    }
-  }
-}
+      );
+    },
+  },
+};
 </script>
 
 <style scoped>

@@ -8,5 +8,5 @@ export { default as DataListContainer } from './DataListContainer';
 export { default as DataFilter } from './DataFilter';
 export { default as DataDetails } from './DataDetails';
 export { default as QuestionListItem } from './QuestionListItem';
+export { default as ORFilterSectionsContainer } from './ORFilterSectionsContainer';
 export { default as ORFilterSection } from './ORFilterSection';
-export { default as ORFilterSectionItems } from './ORFilterSectionItems';
