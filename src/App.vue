@@ -7,7 +7,7 @@
       is-full-page
     ></loading>
     <Layout>
-      <v-container>
+      <v-container fluid>
         <router-view></router-view>
       </v-container>
     </Layout>
