@@ -1,6 +1,19 @@
 # openrank-frontend
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
+_This is the Front-end repository for the OpenRank project._
+
+## You're most welcome for your contributions
+
+  ### Contributing
+  Want to contribute? Please go through the [CONTRIBUTING](/.github/CONTRIBUTING.md) and [CODE OF CONDUCT](/.github/CODE_OF_CONDUCT.md) to know how to contribute to us.
+
+  ### Issues and feature requests
+  Found some issues/bugs? (or) Do you have any new feature request in your mind? Please look at [BUG REPORT](/.github/ISSUE_TEMPLATE/bug_report.md) for reporting bugs/issues, and use [FEATURE REQUEST](/.github/ISSUE_TEMPLATE/feature_request.md) template to send your feature request.
+
+  Want to raise an issue which doesn't fit in above two? Use [CUSTOM TEMPLATE](/.github/ISSUE_TEMPLATE/custom.md)
+
+
 ## Project setup
 ```
 npm install
