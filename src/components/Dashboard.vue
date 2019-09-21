@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid :style="{ backgroundColor: 'aliceblue', width: '100%' }">
+  <v-container fluid :style="{ backgroundColor: 'aliceblue' }">
     <dashboard-header :breadcrumb-items="breadcrumbItems" :tab-items="tabItems" />
   </v-container>
 </template>
