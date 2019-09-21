@@ -4,3 +4,4 @@ export { default as FormAlerts } from './FormAlerts';
 export { default as FormFields } from './FormFields';
 export { default as FormButtons } from './FormButtons';
 export { default as CustomForm } from './CustomForm';
+export { default as Dashboard } from './Dashboard';
