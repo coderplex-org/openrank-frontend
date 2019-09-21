@@ -29,9 +29,9 @@
     </v-col>
     <!--      <v-spacer></v-spacer>-->
     <v-col xs="12" md="3" align-self="center">
-      <div>
-        <v-btn large block>Go to test</v-btn>
-      </div>
+      <v-row>
+        <slot name="actions"></slot>
+      </v-row>
     </v-col>
   </v-row>
 </template>
