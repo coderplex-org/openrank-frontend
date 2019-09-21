@@ -1,11 +1,16 @@
 <template>
-  <v-container fluid :style="{ backgroundColor: 'aliceblue' }">
+  <v-card
+    class="mx-auto px-4"
+    height="100%"
+  >
     <dashboard-header :breadcrumb-items="breadcrumbItems" :tab-items="tabItems" />
-  </v-container>
+    <dashboard-body />
+  </v-card>
 </template>
 
 <script>
 import DashboardHeader from './DashboardHeader';
+import DashboardBody from './DashboardBody';
 
 export default {
   name: 'Dashboard',
@@ -38,6 +43,7 @@ export default {
   }),
   components: {
     DashboardHeader,
+    DashboardBody,
   },
 };
 </script>

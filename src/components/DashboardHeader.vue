@@ -1,6 +1,6 @@
 <template>
   <v-row justify="space-between">
-    <v-col xs="12" md="10">
+    <v-col xs="12" md="9">
       <v-container>
         <v-row>
           <v-breadcrumbs :items="breadcrumbItems">
@@ -12,7 +12,7 @@
         <v-row>
           <v-col xs="12" md="6">
             <v-tabs centered grow class="d-none d-md-flex">
-              <v-tab v-for="(item, index) in tabItems" :key="index" class="ml-0">
+              <v-tab v-for="(item, index) in tabItems" :key="index" class="mx-auto">
                 {{ item.text }}
               </v-tab>
             </v-tabs>
@@ -28,7 +28,7 @@
       </v-container>
     </v-col>
     <!--      <v-spacer></v-spacer>-->
-    <v-col xs="12" md="2" align-self="center">
+    <v-col xs="12" md="3" align-self="center">
       <div>
         <v-btn large block>Go to test</v-btn>
       </div>
